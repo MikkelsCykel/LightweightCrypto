@@ -1,0 +1,45 @@
+\documentclass[Report.tex]{subfiles}
+\begin{document}
+\section{Introduction}
+The following paper seeks to investigate Cryptography issues in
+within the domain of embedded systems. In specific this report will conduct
+three individual performance investigations of the AES-128 encryption environment 
+on a ATmega16 micro controller. The dimensions of this analysis will be, RAM consumption,
+Code Size, and finally Execution Time, all of which will be implemented using the low level 
+programming language C, and analysed using AVR Studio 6. \\
+\textit{Knowledge about AES and Cryptography in general is assumed, 
+as well as basic programming skills in C. However, this article will provide a short introduction
+towards AES-128 in terms of algorithmic specifications.}
+
+\subsection{AES-128 - Algorithm Summary}\label{ALGsum}
+As mentioned the AES cryptography system that this 
+article will focun on is the AES-128 environment with 10 rounds.
+The operations of AES and their order is given in table~\ref{GEAES}.\\\\
+In short terms, the \verb+AddRoundKey+ operation simply XOR's the message
+with the key from the key schedule.\\
+The Substitution Bytes operation simply substitutes the message value with the value
+of the SBox table. That is the value of the message byte becomes the index.\\
+Shiftrows operates by shifting every row $x$ positions to the left, where $x$ is the row number.
+Eg: row 0 stays the same, row 1 is shifted 1 position to the left, and so on.\\
+Finally, the slightly more complex Mix Columns operation, works by multiplying the matrix M
+with the each column such that the keep their order.
+
+\begin{table}[h]
+\begin{center}
+    \begin{tabular}{|l|l|}
+    \hline
+    AES Encryption over n rounds & ~               \\ \hline
+    AddRoundKey                  & Pre-whitening   \\ \hline
+    SubBytes                     & ~               \\
+    ShiftRows                    & For n-1 rounds  \\
+    MixColumns                   & ~               \\
+    AddRoundKey                  & ~               \\ \hline
+    SubBytes                     & ~               \\
+    ShiftRows                    & The Final Round \\
+    AddRoundKey                  & ~               \\ \hline
+    \end{tabular}
+    \caption{\label{GEAES}The general AES algorithm structure}
+\end{center}
+\end{table}
+
+\end{document}
